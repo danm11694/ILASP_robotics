@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 1                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 2                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 3                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 4                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 5                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 6                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Pre-processing                          : 0.165s
+%% Hypothesis Space Generation             : 0.007s
+%% Conflict analysis                       : 17.796s
+%%   - Positive Examples                   : 17.796s
+%% Counterexample search                   : 0.068s
+%%   - CDOEs                               : 0.008s
+%%   - CDPIs                               : 0.061s
+%% Hypothesis Search                       : 3.239s
+%% Propagation                             : 1.831s
+%%   - CDPIs                               : 1.831s
+%% Total                                   : 23.332s
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Searching for counterexample... 
+%% Found positive counterexample: ex16 (a total of 8 counterexamples found) 
+%% Found hypothesis: [2] 2 
+%% action2(V1) :- at(V1, ring, V2). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex15 (a total of 10 counterexamples found) 
+%% Found hypothesis: [0] 2 
+%% action2(V1) :- closed_gripper(V1). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex12 (a total of 8 counterexamples found) 
+%% Found hypothesis: [22] 3 
+%% action2(V1) :- closed_gripper(V1); at(V2, center). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex22 (a total of 6 counterexamples found) 
+%% Found hypothesis: [13] 3 
+%% action2(V1) :- closed_gripper(V1); at(V1, ring, V2). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex63 (a total of 2 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex63'] 
+%% Found hypothesis: [838] 4 
+%% action2(V1) :- closed_gripper(V1); placed(ring, V2, peg, V3); at(V4, ring, V2). 
+%% Searching for counterexample... 
+%%  
+%%  
+%% Final Hypothesis: 
+%%  
+action2(V1) :- closed_gripper(V1); placed(ring, V2, peg, V3); at(V4, ring, V2).
+

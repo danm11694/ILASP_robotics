@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 1                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 2                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 3                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 4                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 5                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 6                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Pre-processing                          : 0.167s
+%% Hypothesis Space Generation             : 0.009s
+%% Conflict analysis                       : 17.783s
+%%   - Positive Examples                   : 17.783s
+%% Counterexample search                   : 0.053s
+%%   - CDOEs                               : 0.007s
+%%   - CDPIs                               : 0.046s
+%% Hypothesis Search                       : 2.984s
+%% Propagation                             : 23.729s
+%%   - CDPIs                               : 23.729s
+%% Total                                   : 47.085s
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Searching for counterexample... 
+%% Found positive counterexample: ex106 (a total of 4 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex106', 'ex73'] 
+%% Found hypothesis: [121] 4 
+%% action3(V1) :- not reachable(V1, peg, V2); placed(ring, V2, peg, V3); reachable(V1, ring, V4). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex112 (a total of 9 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex112', 'ex73'] 
+%% Found hypothesis: [10, 121] 7 
+%% action3(V1) :- not at(V1, peg, V2); reachable(V1, ring, V2). 
+%% action3(V1) :- not reachable(V1, peg, V2); placed(ring, V2, peg, V3); reachable(V1, ring, V4). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex101 (a total of 13 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex101', 'ex73'] 
+%% Found hypothesis: [86, 568] 7 
+%% action3(V1) :- at(V3, center); reachable(V1, ring, V2). 
+%% action3(V1) :- not at(V1, center); not reachable(V1, peg, V2); reachable(V1, ring, V2). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex110 (a total of 11 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex110', 'ex73'] 
+%% Found hypothesis: [48, 568] 7 
+%% action3(V1) :- not closed_gripper(V1); reachable(V1, ring, V2). 
+%% action3(V1) :- not at(V1, center); not reachable(V1, peg, V2); reachable(V1, ring, V2). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex106 (a total of 8 counterexamples found) 
+%% Computed constraint. Now propagating to other examples... 
+%% Constraint propagated to: ['ex106', 'ex73'] 
+%% Found hypothesis: [568, 860] 8 
+%% action3(V1) :- not at(V1, center); not reachable(V1, peg, V2); reachable(V1, ring, V2). 
+%% action3(V1) :- not closed_gripper(V1); at(V3, center); reachable(V1, ring, V2). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex73 (a total of 8 counterexamples found) 
+UNSATISFIABLE

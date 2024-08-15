@@ -1,0 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 1                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 2                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                Iteration 3                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Pre-processing                          : 0.125s
+%% Hypothesis Space Generation             : 0.007s
+%% Conflict analysis                       : 9.622s
+%%   - Positive Examples                   : 9.622s
+%% Counterexample search                   : 0.035s
+%%   - CDOEs                               : 0.008s
+%%   - CDPIs                               : 0.027s
+%% Hypothesis Search                       : 2.871s
+%% Total                                   : 16.009s
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Searching for counterexample... 
+%% Found positive counterexample: ex10 (a total of 7 counterexamples found) 
+%% Found hypothesis: [0] 2 
+%% action1(V1) :- closed_gripper(V1). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex18 (a total of 10 counterexamples found) 
+%% Found hypothesis: [4595] 5 
+%% action1(V1) :- not at(V2, center); closed_gripper(V1); reachable(V2, peg, V3); reachable(V1, ring, V3). 
+%% Searching for counterexample... 
+%% Found positive counterexample: ex24 (a total of 8 counterexamples found) 
+UNSATISFIABLE

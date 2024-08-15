@@ -338,27 +338,6 @@ class motion_manager(object):
                     
                         rate.sleep()
 
-                
-        if np.any([el for el in self.new_action if el]): #if one new action was experienced
-            idx = np.where(np.array(self.new_action) == True)[0]
-            new_dmp = dmps[idx[0]] #select new action
-            new_dmp.imitate_path(np.array(self.traj[int(self.manip_id[idx[0]][-1])-1])) #imitate human trajectory
-            weights = [[list(el) for el in new_dmp.w_cart], [list(el) for el in new_dmp.w_quat]]
-
-            #update config file
-            with open(self.path + self.task + ".json", "r") as jsonFile:
-                config = json.load(jsonFile)
-            new_config = [c for c in config["actions"] if c["name"] == self.state[idx[0]] and self.location[idx[0]] == c["object"]][0]
-            config["actions"][config["actions"].index(new_config)]["weights"] = weights
-            if new_config["has_goal"] == []: #the new action does not require goal from sensing -> save total displacement in human motion
-                delta_pos = np.array(self.traj[int(self.manip_id[idx[0]][-1])-1][-1][0:3]) - np.array(self.traj[int(self.manip_id[idx[0]][-1])-1][0][0:3])
-                start_or = Quaternion(np.array(self.traj[int(self.manip_id[idx[0]][-1])-1][0][3:]))
-                final_or = Quaternion(np.array(self.traj[int(self.manip_id[idx[0]][-1])-1][-1][3:]))
-                delta_or = final_or * start_or.inverse
-            config["actions"][config["actions"].index(new_config)]["has_goal"] = [list(delta_pos), list(delta_or)]
-            with open(self.path + self.task + ".json", "w") as jsonFile:
-                json.dump(config, jsonFile, indent=4)
-
         self.sensing_pub.publish(Int32(0))
         rospy.sleep(2.)
 

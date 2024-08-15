@@ -22,7 +22,7 @@ class Listener(object):
         self.new_axioms = []
         self.received_context = False
         self.received_axioms = False
-        self.wrong_plan = None
+        self.wrong_plan = False
         self.got_action = False
         self.asked_context_update = False
         rospy.Subscriber('/context/model', ContextModel, self.context_cb)
@@ -55,10 +55,7 @@ class Listener(object):
                 self.got_action = True
 
     def ask_user(self):
-        confirm = "n"
-        while confirm != "y":
-            user_action = input("ENTER NEXT ACTION AS NAME(AGENT, object, property) - lower-case = optional : ")
-            confirm = input("ENTERED" + user_action + ": IS IT CORRECT? PLEASE TYPE y FOR YES OR n FOR NO")
+        user_action = input("ENTER NEXT ACTION AS NAME(AGENT, object, property) - lower-case = optional : ")
         user_action.replace(" ", "").lower() #standard formatting
         n_args = 0
         is_new = False
@@ -158,7 +155,7 @@ class Solver(object):
 
         if result.satisfiable:
             if self.atoms != []:
-                rospy.logwarn("FOUND A PLAN!")
+                rospy.loginfo("FOUND AN ANSWER SET!")
                 for atom in self.atoms:
                     tmp_list = ['none', 'none', 'none', 'none', 0]
                     tmp_list[0] = atom.name # name...
@@ -168,14 +165,14 @@ class Solver(object):
                     self.ordered_atoms.append(tmp_list)
 
                 self.ordered_atoms.sort(key = lambda action: action[-1])
-                rospy.logwarn('SEQUENCE OF POSSIBLE ACTIONS IS: ')
-                rospy.logwarn(self.ordered_atoms)
+                rospy.loginfo('SEQUENCE OF POSSIBLE ACTIONS IS: ')
+                rospy.loginfo(self.ordered_atoms)
             
             return False
 
         else:
             # rospy.signal_shutdown('UNSATISFIABLE PLANNING! EXITING...')
-            rospy.logwarn("UNSATISFIABLE! ASKING FOR USER INPUT...")
+            rospy.loginfo("UNSATISFIABLE! ASKING FOR USER INPUT...")
             return True
 
     def get_action_msg(self):
@@ -208,7 +205,7 @@ class Solver(object):
 def main():
     rospy.init_node('ASP_manager')
     filename = rospy.get_param("asp_name")
-    # failed_planning = False
+    failed_planning = False
 
     listener = Listener()
     solver = Solver(filename)
@@ -218,65 +215,59 @@ def main():
 
     while not rospy.is_shutdown():
         if listener.received_context:
-            # failed_planning = False
-            rospy.logwarn('FLUENTS ARE:')
-            rospy.logwarn(listener.context)
+            failed_planning = False
+            rospy.loginfo('FLUENTS ARE:')
+            rospy.loginfo(listener.context)
             solver.restart()
             failed_planning = solver.solve(listener.context)
             listener.received_context = False
             if failed_planning:
-                rospy.logwarn("ACTION INPUT NEEDED BY USER! (in failed planning)")
+                rospy.loginfo("ACTION INPUT NEEDED BY USER!")
                 listener.ask_user()
+                failed_planning = True
 
         #ACTION FROM AUTONOMOUS SYSTEM
-        action = solver.get_action_msg()
-        if action != ActionArray():
-            listener.action_pub.publish(action)
-            #ACTION FEEDBACK
-            rospy.logwarn("WAITING FOR ACTION FEEDBACK...")
-            while listener.wrong_plan is None:
-                pass
-            rospy.logwarn("GOT FEEDBACK")
-            if listener.feedback:
-                #ASK FOR FLUENTS IF FAILURE OCCURS
-                rospy.logwarn("FAILURE")
-                solver.ordered_atoms = solver.ordered_atoms[:solver.action_index]
-                listener.sensing_pub.publish(Int32(1))
-            elif listener.wrong_plan:
-                #ASK FOR USER INPUT
-                rospy.logwarn("FORBIDDEN ACTION")
-                solver.ordered_atoms = solver.ordered_atoms[:solver.action_index]
-                listener.ask_user()
-
-            listener.feedback = None
-            listener.wrong_plan = None
-
-        elif not listener.got_action:
-            #IF GOAL ALREADY SATISFIED, ASK FOR NEW CONTEXT DESCRIPTION
-            if not listener.asked_context_update: #to temporize requests of new context, avoiding conflicts
-                init_time = rospy.Time.now()
-                listener.asked_context_update = True
-                rospy.logwarn("ASKING FOR NEW CONTEXT")
-                listener.sensing_pub.publish(Int32(1))
-            if rospy.Time.now() - init_time > rospy.Duration(10.):
-                rospy.logwarn("RE-ASKING FOR NEW CONTEXT")
-                listener.asked_context_update = False
+        if not failed_planning:
+            action = solver.get_action_msg()
+            if action != ActionArray():
+                listener.action_pub.publish(action)
+                #ACTION FEEDBACK
+                rospy.loginfo("WAITING FOR ACTION FEEDBACK...")
+                while listener.feedback is None:
+                    if listener.wrong_plan:
+                        rospy.loginfo("ACTION INPUT NEEDED BY USER!")
+                        listener.ask_user()
+                        listener.wrong_plan = False
+                        failed_planning = True
+                        break
+                if listener.feedback:
+                    #ASK FOR FLUENTS IF FAILURE OCCURS
+                    listener.sensing_pub.publish(Int32(1))
+                    failed_planning = True
+                listener.feedback = None
+            else:
+                #IF GOAL ALREADY SATISFIED, ASK FOR NEW CONTEXT DESCRIPTION
+                if not listener.asked_context_update: #to temporize requests of new context, avoiding conflicts
+                    init_time = rospy.Time.now()
+                    listener.asked_context_update = True
+                    listener.sensing_pub.publish(Int32(1))
+                if rospy.Time.now() - init_time > rospy.Duration(10.):
+                    listener.asked_context_update = False
 
         #ACTION COMES FROM EXTERNAL USER 
         if listener.got_action:
             listener.got_action = False
             #ACTION FEEDBACK
-            rospy.logwarn("WAITING FOR ACTION FEEDBACK (commanded from user)...")
-            while listener.wrong_plan is None:
+            rospy.loginfo("WAITING FOR ACTION FEEDBACK...")
+            while listener.feedback is None:
                 pass
-            rospy.logwarn("GOT FEEDBACK")
-            # if listener.feedback:
-            #     #ASK FOR FLUENTS IF FAILURE OCCURS
-            #     rospy.logwarn("FAILURE IN USER ACTION")
-            #     listener.sensing_pub.publish(Int32(1))
-
             listener.feedback = None
-            listener.wrong_plan = None
+
+            #WAIT FOR ILP TO UPDATE TASK KNOWLEDGE
+            while not listener.received_axioms:
+                pass
+            rospy.loginfo("UPDATING TASK KNOWLEDGE")
+            listener.received_axioms = False
 
             #ALWAYS ASK FOR FLUENTS WHEN USER ACTION IS RECEIVED
             listener.sensing_pub.publish(Int32(1))

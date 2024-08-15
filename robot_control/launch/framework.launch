@@ -3,13 +3,20 @@
   <param name="task_name" type="string" value="pegring"/>
   <param name="asp_name" type="string" value="pegring_sequential.lp"/>
   <param name="dvrk_frame_id" type="string" value=""/>
-  <!-- <param name="num_ex" type="int" value="0"/> -->
   <!-- <param name="dvrk_frame_id" type="string" value="_new"/> -->
 
   <node
     pkg="robot_control"
     type="sensing_pegring.py"
     name="sensing_node"
+    output="screen"
+    respawn="false"
+  />
+
+  <node
+    pkg="task_reasoning"
+    type="ILP_pegring.py"
+    name="ILP_node"
     output="screen"
     respawn="false"
   />
