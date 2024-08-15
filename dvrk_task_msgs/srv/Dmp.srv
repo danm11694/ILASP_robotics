@@ -1,0 +1,4 @@
+geometry_msgs/PoseStamped target_pose
+std_msgs/String dmp_name
+---
+geometry_msgs/PoseArray dmp_trajectory

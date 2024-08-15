@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="tf" 
+    type="static_transform_publisher" 
+    name="static_ecm_realsense" 
+    args="-0.02000150710171566 0.01517189775390078 -0.1348639558171104 0.518840347721642 -0.4786215176389441 0.5168788822615201 0.4843163816155314 /ECM /camera_link 10"/>
+
+    <node pkg="tf" 
+    type="static_transform_publisher" 
+    name="static_realsense_endoleft" 
+    args="0.0370 -0.0173 0.1283 -0.0085 0.0213 0.0244 0.9994 /camera_color_optical_frame /endoscope/left_camera 10"/>
+</launch>

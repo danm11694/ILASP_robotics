@@ -1,0 +1,71 @@
+{
+    "actions": [
+        {
+            "name": "move",
+            "object": "ring",
+            "policy": "move_ring",
+            "policy_type": "dmp",
+            "n_arms": 1,
+            "weights": [
+                []
+            ],
+            "has_goal": false
+        },
+        {
+            "name": "move",
+            "object": "peg",
+            "policy": "move_peg",
+            "policy_type": "dmp",
+            "n_arms": 1,
+            "weights": [
+                []
+            ],
+            "has_goal": false
+        },
+        {
+            "name": "move",
+            "object": "center",
+            "policy": "move_center",
+            "policy_type": "dmp",
+            "n_arms": 2,
+            "weights": [
+                [],
+                []
+            ],
+            "has_goal": false
+        },
+        {
+            "name": "grasp",
+            "object": "ring",
+            "policy": "grasp",
+            "policy_type": "custom",
+            "n_arms": 1,
+            "weights": [
+                []
+            ],
+            "has_goal": false
+        },
+        {
+            "name": "release",
+            "object": "none",
+            "policy": "release",
+            "policy_type": "custom",
+            "n_arms": 1,
+            "weights": [
+                []
+            ],
+            "has_goal": false
+        },
+        {
+            "name": "extract",
+            "object": "ring",
+            "policy": "extract",
+            "policy_type": "custom",
+            "n_arms": 1,
+            "weights": [
+                []
+            ],
+            "has_goal": false
+        }
+    ]
+}

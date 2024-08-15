@@ -1,0 +1,64 @@
+<launch>
+  <!-- rosrun tf tf_echo ECM camera_color_optical_frame -->
+  <!-- <node pkg="tf" name="rs2ecm" type="static_transform_publisher" args="-0.036 0.021 0.001 -0.006 0.003 0.003 1.000 ECM camera_color_optical_frame 10"/> -->
+  <!-- <node pkg="tf" name="connecting_realsense" type="static_transform_publisher" args="0.015 0.000 0.000 0.504 -0.496 0.501 0.498 camera_color_optical_frame camera_link 10"/> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="handeye_left" output="screen" args="0.0024 -0.0000 0.0032 -0.0000 0.0002 0.0005 1.0000 /ECM /endoscope/left_camera 10"/> -->
+
+  <arg name="global_frame" default="/world"/>
+  <arg name="tool_points" default="3"/>
+  <arg name="load_reference" default="false"/>
+
+  <!-- Lenght of the adapter attached on the tip of EGS -->
+  <arg name="adapter_len" default="0.15" />
+  <node pkg="global_frame_registration" type="adapter_pose_publisher" name="adapter_pose_publisher" output="screen" unless="$(arg load_reference)">
+    <param name="adapter_len" value="$(arg adapter_len)"/>
+  </node>
+
+  <!-- /dvrk/ECM/adapter_position, /pointPose, /dvrk/PSM1/position_cartesian_current -->
+  <node pkg="global_frame_registration" name="global_frame_registration" type="global_frame_registration" required="true" output="screen">
+    <rosparam>
+        tool_subscribers: [/camera_point, /dvrk/PSM1/position_cartesian_current, /dvrk/PSM2/position_cartesian_current]
+        camera_subscribers: []
+        rgbd_subscribers: []
+        registrations:
+        - frame_id: PSM2_base
+          orientation: [-0.15122913661431373, 0.053200646319086026, 0.874869047442616, 0.4570597218055542]
+          parent_frame: /world
+          position: [-0.03699753441412763, 0.10142174139167376, 0.16061447926261171]
+        - frame_id: PSM1_base
+          orientation: [0.15190126707964235, -0.3232606728781092, 0.41248149998349115, 0.8380259868293826]
+          parent_frame: /world
+          position: [-0.0752478676842763, -0.053438599880214106, 0.11405856779205066]
+        - frame_id: camera_color_optical_frame
+          orientation: [-0.6014876451707877, 0.6829110697175302, -0.3068860586811336, 0.27868625827499843]
+          parent_frame: /world
+          position: [-0.13680480153679295, 0.03303992285475982, 0.1316465944382773]
+    </rosparam>
+
+    <param name="global_frame_name" type="string" value="$(arg global_frame)"/>
+    <param name="num_points" type="int" value="$(arg tool_points)"/>
+    <param name="use_existing" type="bool" value="$(arg load_reference)"/>
+  </node>
+</launch>
+
+
+<!-- 
+  NEEDLE DRIVER
+
+- frame_id: PSM1_base_new
+          orientation: [-0.05286515255440112, -0.01722619139778179, -0.8119157466203847, 0.5811207743362737]
+          parent_frame: /world
+          position: [0.062291450734913816, 0.129945332083811, 0.0940353408382395]
+
+SCISSORS
+
+- frame_id: PSM1_base_new
+  orientation: [-0.061524392572872906, -0.03526682739193846, -0.8150661508220101, 0.575011451875907]
+  parent_frame: /world
+  position: [0.06480735560189511, 0.1282195250413838, 0.09056419669459312]
+
+
+
+
+-->

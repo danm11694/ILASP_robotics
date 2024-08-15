@@ -1,0 +1,6 @@
+<launch>
+
+
+	<node pkg="peg_ring" name="visualization_test" type="visualization_test.py" output="screen"/> 
+	
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+
+
+    <arg name="stereo" default="endoscope"/>
+    <group ns="$(arg stereo)">
+        <node pkg="stereo_image_proc" name="stereo_coppelia" type="stereo_image_proc" respawn="false" output="screen">
+            <param name="approximate_sync" value="true"/>
+            <param name="queue_size" value="20"/>
+        </node>
+    </group>
+
+
+</launch>

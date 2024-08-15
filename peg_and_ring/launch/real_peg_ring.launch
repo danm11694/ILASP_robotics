@@ -1,0 +1,44 @@
+<launch>
+
+      <node pkg="peg_ring" name="ConvertPCD" type="converterPCD" output="screen">
+          <param name="in" type="string" value="/camera/depth_registered/points"/>
+          <param name="out" type="string" value="/ECM/depth_registered/points"/>
+          <param name="target_frame" type="string" value="ECM"/>
+          <param name="source_frame" type="string" value="/camera_color_optical_frame"/>
+      </node> 
+
+
+      <!-- Start peg_ring -->
+    <node name="peg_ring_node" pkg="peg_ring" type="peg_ring_node" args="" respawn="false" output="screen">
+        <!--launch-prefix="xterm -e gdb - -args" -->
+        <!--launch-prefix="gnome-terminal -e gdb"> -->
+
+        <rosparam>tool_subscribers: [/dvrk/PSM1/cartesian_position,/dvrk/PSM2/cartesian_position]</rosparam>
+
+        <param name="cld_topic_name" type="string" value="/ECM/depth_registered/points"/>
+        <param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+        <param name="camera_info_name" type="string" value="/camera/color/camera_info"/>
+        <!-- <param name="fixed_frame" type="string" value="/camera_link"/> -->
+        <param name="fixed_frame" type="string" value="/world"/>
+        <param name="optical_frame" type="string" value="/ECM"/>
+        <param name="Current_action" type="string" value="/Current_action"/>
+
+        <param name="robot_frame" type="string" value="/PSM1_base"/>
+
+        <!-- DAVINCI SETUP -->
+        <param name="orig_cld_voxel_size" value="0.001"/>
+        <!-- 01-->
+        <param name="object_cluster_distance" type="double" value="0.005"/>
+        <param name="min_object_cluster_size" type="int" value="1"/>
+        <!-- <param name="max_object_cluster_size" type="int" value="500"/> -->
+        <param name="ee_treshold" type="double" value="0.06"/>
+        <param name="tracking_value" type="string" value="/tracking_value"/>
+        <param name="threshold_tracking" type="double" value="0.005"/>
+		<param name="torus_points" type="int" value="100"/>
+
+    </node>
+
+
+    <node name="rviz_peg_ring" pkg="rviz" type="rviz" args="-d $(find peg_ring)/rviz/peg_ring_rviz.rviz" respawn="false"/>  
+
+</launch>

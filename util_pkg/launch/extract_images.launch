@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/andrea/OS/Users/andre/Desktop/ChiaraZ/20220422_141820.bag"/>
+  <node name="extract" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/device_0/sensor_1/Color_0/image/data"/>
+  </node>
+</launch>

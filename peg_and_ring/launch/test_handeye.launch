@@ -1,0 +1,17 @@
+<!-- 
+TEST HAND EYE CALIBRATION 
+once we did calibration with easy_handeye packages, we copy the output of the estimanted TF here as static_transform_publisher 
+Then we launch the aruco ros package to find the aruco in the scene and we move the robot to the goal pose after the conversion between the frames.  
+-->
+<launch>
+	
+	    <!-- NEW CALIB 8 LUGLIO -->
+	<node pkg="tf" type="static_transform_publisher" name="world_broadcast_wp" args="0.894956415008 -0.00704724608067 0.602746159764 0.457032513962 0.0102292419996 -0.889017659236 0.0257729578486  panda_link0 camera_link 1000" />  
+   
+
+	<node pkg="peg_ring" name="worldPoseConverter_py" type="worldPoseConverter.py" output="screen">
+		<param name="grasping_topic" type="string" value="/aruco_tracker/pose"/>
+        <param name="converted_topic" type="string" value="/peg_converted/pose"/>
+    </node>
+	
+</launch>

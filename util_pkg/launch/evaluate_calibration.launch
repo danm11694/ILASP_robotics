@@ -1,0 +1,11 @@
+<launch>
+
+	<node name="evaluate_calibration" pkg="util_pkg" type="evaluate_calibration" args="" respawn="false" output="screen">>
+		
+		<param name="camera_color_name" type="string" value="/camera/color/image_raw"/>
+		<param name="camera_depth_name" type="string" value="/camera/aligned_depth_to_color/image_raw"/>
+		<param name="camera_info_name" type="string" value="/camera/color/camera_info"/>
+		<param name="arm_topic" type="string" value="/mesa_left/ee_pose"/>
+	</node>
+
+</launch>

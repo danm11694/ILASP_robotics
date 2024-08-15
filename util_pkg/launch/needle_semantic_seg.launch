@@ -1,0 +1,47 @@
+<launch>
+  <!-- <node name="rep" type="republish" pkg="image_transport" output="screen" args="compressed
+  in:=/camera/color/image_raw raw out:=/camera/color/image_raw" /> -->
+  <!-- <node name="rep_sm" type="republish" pkg="image_transport" output="screen" args="compressed
+  in:=/semantic_scene/image raw out:=/semantic_scene/image" /> -->
+
+
+  <node name="needle_semantic_segmentation" pkg="util_pkg" type="needle_semantic_segmentation"
+    respawn="false" output="screen">
+    <param name="camera_image_frame" type="string" value="camera_color_optical_frame" />
+    <param name="template_img_str" type="string"
+      value="$(find util_pkg)/templates/small_templateNeedle_light_gt_smooth.png" />
+    <param name="camera_config" type="string" value="$(find util_pkg)/templates/realsense.yaml" />
+    <param name="log_points" type="string" value="$(find util_pkg)/templates/Phantom100_50_0" />
+    <param name="rec_threshold" value="0.62" />
+
+    <param name="pixel_value" value="30" />
+
+    
+    <!-- <param name="pix2mm" value="0.293892" />
+    <rosparam param="camera_R"> [0.9953744031060026, -0.08780735797628957, 0.03898288761229582,
+ -0.03941143302823806, -0.003151499204046486, 0.9992180978141997,
+ -0.08761584667187701, -0.9961324891489035, -0.006597535447385877]
+ </rosparam> -->
+    
+
+    <rosparam>
+      mask_anatomy: [needle]
+    </rosparam>
+
+    <remap from="needle_semantic_segmentation/image" to="/device_0/sensor_1/Color_0/image/data" />
+    <remap from="needle_semantic_segmentation/image_info"
+      to="/device_0/sensor_1/Color_0/info/camera_info" />
+    <remap from="needle_semantic_segmentation/semantic" to="/semantic_scene/image/compressed" />
+
+  </node>
+  <group ns="semantic_scene">
+
+    <rosparam>
+      colors:
+      - background: [0, 0, 0]
+      - fat: [255, 255, 0]
+      - needle: [255, 0, 0 ]
+      - markers: [255, 0, 255]
+    </rosparam>
+  </group>
+</launch>

@@ -1,0 +1,8 @@
+<launch>
+	
+	<node pkg="peg_ring" name="SaveData_py" type="save_data.py" output="screen">
+        <param name="ee_pose" type="string" value="/franka_pub/pose_new"/>
+        <param name="filename" type="string" value="kinematic.txt"/>
+    </node>
+	
+</launch>

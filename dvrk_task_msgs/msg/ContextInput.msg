@@ -1,0 +1,2 @@
+string[] atoms
+bool[] values

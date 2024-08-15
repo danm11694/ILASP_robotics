@@ -1,0 +1,20 @@
+<!-- 
+TEST REGISTRATION
+We test the peg_registrator node. 
+* [use_existing = True]  publish on "peg_pose" topic, once we did pegs calibration 
+* [use_existing = False] subscribe on "ee_pose" to registrate the ee pose and write it to file 
+
+-->
+<launch>
+	
+	<node pkg="peg_ring" name="peg_registrator_py" type="peg_registrator.py" output="screen">
+		<param name="peg_pose" type="string" value="/peg/pose"/>
+        <param name="ee_pose" type="string" value="/franka_pub/pose_new"/>
+        <param name="all_pegs" type="string" value="/franka_pub/all_pegs"/>
+        <param name="use_existing" type="bool" value="True"/>
+        <!-- <param name="filename" type="string" value="test_pegs_record.txt"/>  -->
+        <param name="filename" type="string" value="pegs_record_21_02.txt"/> 
+        <param name="num_pegs" type="int" value="4"/>
+    </node>
+	
+</launch>

@@ -1,0 +1,42 @@
+<launch>
+
+	<node name="correspondenceRosNode" pkg="peg_ring" type="correspondenceRos" args="" respawn="false" output="screen">>
+		
+		<param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+		<param name="camera_depth_name" type="string" value="/camera/depth_registered/points"/>
+
+		<param name="algorithm" type="string" value="RANSAC"/>
+		
+        <param name="model" type="string" value="$(find peg_ring)/models/ring.pcd"/>
+        <param name="scene" type="string" value="$(find peg_ring)/models/scene_red.pcd"/>
+        <param name="load_scene" type="bool" value="false"/>
+
+
+        <param name="use_cloud_resolution" type="bool" value="false"/>
+        <param name="show_keypoints" type="bool" value="false"/>
+        <param name="show_correspondences" type="bool" value="false"/>
+        <param name="use_hough" type="bool" value="false"/>
+
+        <param name="model_ss" type="double" value="0.01"/>
+        <param name="scene_ss" type="double" value="0.03"/>
+        <param name="rf_rad" type="double" value="0.015"/>
+        <param name="descr_rad" type="double" value="0.02"/>
+        <param name="cg_size" type="double" value="0.01"/>
+        <param name="cg_thresh" type="double" value="0.5"/>
+
+        <param name="k_normal_search" type="int" value="10"/>
+
+	</node>
+
+</launch>
+
+
+		
+		<!--
+	"RANSAC"
+    "LMEDS"
+    "MSAC"
+    "RRANSAC"
+    "RMSAC"
+    "MLESAC"
+    "PROSAC"-->    

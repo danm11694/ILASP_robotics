@@ -1,0 +1,17 @@
+<launch>
+
+    <node name="chessboard_rec" pkg="util_pkg" type="chessboard_rec" args="" respawn="false" output="screen">>
+
+        <param name="camera_color_name" type="string" value="/device_0/sensor_1/Color_0/image/data"/>
+        <param name="camera_info_name" type="string" value="/device_0/sensor_1/Color_0/info/camera_info"/>
+<!-- 
+        <param name="camera_color_name" type="string" value="/camera/color/image_raw"/>
+        <param name="camera_info_name" type="string" value="/camera/color/camera_info"/> -->
+
+        <param name="marker_frame" type="string" value="marker_frame"/>
+        <param name="pattern_width" type="int" value="6"/>
+        <param name="pattern_height" type="int" value="5"/>
+        <param name="square_size" type="double" value="0.010"/>
+    </node>
+
+</launch>

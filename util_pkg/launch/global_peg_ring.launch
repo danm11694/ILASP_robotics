@@ -1,0 +1,42 @@
+<launch>
+  <!-- rosrun tf tf_echo ECM camera_color_optical_frame -->
+  <!-- <node pkg="tf" name="rs2ecm" type="static_transform_publisher" args="-0.036 0.021 0.001 -0.006 0.003 0.003 1.000 ECM camera_color_optical_frame 10"/> -->
+  <!-- <node pkg="tf" name="connecting_realsense" type="static_transform_publisher" args="0.015 0.000 0.000 0.504 -0.496 0.501 0.498 camera_color_optical_frame camera_link 10"/> -->
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="handeye_left" output="screen" args="0.0024 -0.0000 0.0032 -0.0000 0.0002 0.0005 1.0000 /ECM /endoscope/left_camera 10"/> -->
+
+  <arg name="global_frame" default="/world"/>
+  <arg name="tool_points" default="3"/>
+  <arg name="load_reference" default="false"/>
+
+  <!-- Lenght of the adapter attached on the tip of EGS -->
+  <arg name="adapter_len" default="0.15" />
+  <!-- <node pkg="global_frame_registration" type="adapter_pose_publisher" name="adapter_pose_publisher" output="screen" unless="$(arg load_reference)">
+    <param name="adapter_len" value="$(arg adapter_len)"/>
+  </node> -->
+
+  <!-- /dvrk/ECM/adapter_position, /pointPose, /dvrk/PSM1/position_cartesian_current -->
+  <node pkg="global_frame_registration" name="global_frame_registration" type="global_frame_registration" required="true" output="screen">
+    <rosparam>
+        tool_subscribers: [/camera_point, /mesa_left/ee_pose]
+        camera_subscribers: []
+        registrations:
+        - frame_id: PSM2_base
+          orientation: [-0.04606771408384908, 0.02195971007351233, 0.8125473963923365, 0.5806567535718598]
+          parent_frame: /world
+          position: [0.040464515695712105, 0.08874021638392367, 0.17529293240406169]
+        - frame_id: PSM1_base
+          orientation: [-0.0226664590580809, -0.10403943262584742, 0.6282701456092613, 0.7706741543796428]
+          parent_frame: /world
+          position: [-0.050873927993583506, -0.12603349292430724, 0.12239481219404047]
+        - frame_id: ECM_base
+          orientation: [-0.2925059255029476, -0.28916345427581647, 0.646288741209382, 0.6427562860392222]
+          parent_frame: /world
+          position: [-0.26008772561814963, -0.007929803806850332, 0.22880057045641886]
+    </rosparam>
+
+    <param name="global_frame_name" type="string" value="$(arg global_frame)"/>
+    <param name="num_points" type="int" value="$(arg tool_points)"/>
+    <param name="use_existing" type="bool" value="$(arg load_reference)"/>
+  </node>
+</launch>

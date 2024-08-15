@@ -1,0 +1,12 @@
+%YAML:1.0
+---
+camera_w: 640
+camera_h: 480
+pattern_width: 6
+pattern_height: 5
+square_size: 0.004
+camera_matrix: !!opencv-matrix
+  rows: 3
+  cols: 3
+  dt : d
+  data: [617.3041381835938, 0.0, 309.73211669921875, 0.0, 617.5072021484375, 241.4796905517578, 0.0, 0.0,1.0]

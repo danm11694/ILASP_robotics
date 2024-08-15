@@ -1,0 +1,10 @@
+<launch>
+	<node name="registration" pkg="peg_and_ring" type="registration_pipeline" respawn="true" output="screen">
+		<param name="voxel_size" value="0.01"/>
+		<param name="map_path" type="string" value="$(find peg_and_ring)/models/scene_red.ply"/>
+		<param name="reference_frame" type="string" value="world"/>
+		
+        <!-- subscriber -->
+		<remap from="registration/sparse_pointcloud" to="/slam_registration/sparse_pointcloud"/> 
+	</node>
+</launch>

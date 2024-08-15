@@ -1,0 +1,25 @@
+<!-- 
+CONVERT PCD - convert a point cloud to panda_link0 frame
+-->
+<launch>
+	
+	<!-- <node pkg="peg_ring" name="ConvertPCD_py" type="convert_pcd.py" output="screen">
+	    <param name="in" type="string" value="/output_cloud"/>
+        <param name="out" type="string" value="/output_cloud_transformed"/>
+        <param name="target_frame" type="string" value="world"/>
+        <param name="source_frame" type="string" value="ECM"/>
+    </node> -->
+	
+      <node pkg="peg_ring" name="ConvertPCD" type="converterPCD" output="screen">
+          <param name="in" type="string" value="/camera/depth_registered/points"/>
+          <param name="out" type="string" value="/ECM/depth_registered/points"/>
+          <param name="target_frame" type="string" value="ECM_base"/>
+          <param name="source_frame" type="string" value="/camera_color_optical_frame"/>
+      </node> 
+
+</launch>
+
+
+<!-- rosrun pcl_ros pointcloud_to_pcd input:=/output_cloud_transformed -->
+<!--EXAMPLE usage : rosrun util_pkg converter_pcl  name.pcd  name.obj -->
+

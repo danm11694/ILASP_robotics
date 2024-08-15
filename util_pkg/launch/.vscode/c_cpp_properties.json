@@ -1,0 +1,41 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/saras/Workspace/catkin_ws/devel/include/**",
+        "/home/saras/Workspace/saras/linux/devel/include/**",
+        "/opt/ros/kinetic/include/**",
+        "/home/saras/Workspace/saras/linux/src/aruco_ros/aruco/include/**",
+        "/home/saras/Workspace/saras/linux/src/aruco_ros/aruco_ros/include/**",
+        "/home/saras/Workspace/catkin_ws/src/davinci_task/daVinci_peg_ring/include/**",
+        "/home/saras/Workspace/saras/linux/src/blackmagic_ros/decklink_ros/include/**",
+        "/home/saras/Workspace/saras/linux/src/blackmagic_ros/decklink_wrapper/include/**",
+        "/home/saras/Workspace/saras/linux/src/global_frame_registration/include/**",
+        "/home/saras/Workspace/saras/linux/src/cyphy-elas-ros/libelas/include/**",
+        "/home/saras/Workspace/saras/linux/src/mesa/mesa_cli/include/**",
+        "/home/saras/Workspace/saras/linux/src/mesa/mesa_ros_interface/include/**",
+        "/home/saras/Workspace/saras/linux/src/monocular_map_registration/include/**",
+        "/home/saras/Workspace/saras/linux/src/netft_utils/include/**",
+        "/home/saras/Workspace/saras/linux/src/obstacle_avoidance/include/**",
+        "/home/saras/Workspace/catkin_ws/src/peg_and_ring/include/**",
+        "/home/saras/Workspace/catkin_ws/src/realsense-ros/realsense2_camera/include/**",
+        "/home/saras/Workspace/saras/linux/src/saras_common/include/**",
+        "/home/saras/Workspace/saras/linux/src/saras_control/include/**",
+        "/home/saras/Workspace/saras/linux/src/saras_mpc/include/**",
+        "/home/saras/Workspace/saras/linux/src/strain_gauges/strain_gauges_calibration/include/**",
+        "/home/saras/Workspace/saras/linux/src/strain_gauges/strain_gauges_msgs/include/**",
+        "/home/saras/Workspace/saras/linux/src/strain_gauges/strain_gauges_publisher/include/**",
+        "/home/saras/Workspace/saras/linux/src/touchball_receiver/include/**",
+        "/home/saras/Workspace/saras/linux/src/teleoperation/two_layer/include/**",
+        "/home/saras/Workspace/catkin_ws/src/utils/util_pkg/include/**",
+        "/home/saras/Workspace/saras/linux/src/visual_feedback/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ]
+}

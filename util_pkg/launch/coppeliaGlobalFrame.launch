@@ -1,0 +1,38 @@
+<!-- carica il nodo global_frame_registration -->
+
+<launch>
+
+  <arg name="global_frame" default="/world_global"/>            <!-- in simulation the frame WORLD alreay exists -->
+  <arg name="tool_points" default="3"/>                         <!-- number of the points used to -->
+  <arg name="load_reference" default="false"/>                  <!-- false permette di registrare i frame -->
+
+  <!-- Lenght of the adapter attached on the tip of ECM, if we use DaVinci we attach an adapter to reach the points
+  <arg name="adapter_len" default="0.15" />
+  <node pkg="global_frame_registration" type="adapter_pose_publisher" name="adapter_pose_publisher" output="screen" unless="$(arg load_reference)">
+    <param name="adapter_len" value="$(arg adapter_len)"/>
+  </node>
+    -->
+
+  <!-- in tool_subscriber we put geometry_msgs/PoseStamped of the topics we register. e.g. end-effector of the robots or pose of the points-->
+  <!-- /dvrk/ECM/adapter_position, /pointPose, /dvrk/PSM1/position_cartesian_current -->
+  <node pkg="global_frame_registration" name="global_frame_registration" type="global_frame_registration" required="true" output="screen">
+    <rosparam>
+        tool_subscribers: [/pointPoseArray, /robot/end_effector] <!-- rappresenta il centro della circonferenza del marker [righe 18-26: parametri della posa] -->
+        array_subscribers: [] <!-- devo aggiungere qualcosa?? -->
+        camera_subscribers: []
+        global_frame_name: /world_global
+        num_points: 3
+        registrations:
+        - frame_id: camera_color_optical_frame
+          <!-- orientation: [-0.6530300566685288, 0.6548244198081733, -0.2746879421871697, 0.2632551209898216] -->
+          orientation: [0.6572671497958567, -0.6505712469497967, 0.2729734084783321, -0.26503295022532475]
+          parent_frame: /world_global
+          <!-- position: [-0.1286998897941842, 0.0030481811828924864, 0.09785443108365582] -->
+          position: [-0.12838579935622155, 0.0007615719499432936, 0.09785430681439686]
+    </rosparam>
+
+    <param name="global_frame_name" type="string" value="$(arg global_frame)"/>
+    <param name="num_points" type="int" value="$(arg tool_points)"/>
+    <param name="use_existing" type="bool" value="$(arg load_reference)"/>
+  </node>
+</launch>

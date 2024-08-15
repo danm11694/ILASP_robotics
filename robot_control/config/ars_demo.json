@@ -1,0 +1,9 @@
+{
+    "actions": [
+        {"name" : "move",
+        "weights": [
+            []
+        ]
+        }
+    ]
+}

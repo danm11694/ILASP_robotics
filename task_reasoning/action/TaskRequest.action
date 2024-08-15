@@ -1,0 +1,8 @@
+# Define the goal
+string request
+---
+# Define the result
+string result
+---
+# Define a feedback message
+string status

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="rate" default="100"/>
+
+    <include file="$(find dvrk_model)/launch/arm_rviz.launch">
+        <arg name="arm" value="PSM1"/>
+        <arg name="gui" value="false"/>
+        <arg name="rviz" value="false"/>
+        <arg name="rate" value="$(arg rate)"/>
+    </include>
+
+    <include file="$(find dvrk_model)/launch/arm_rviz.launch">
+        <arg name="arm" value="PSM2"/>
+        <arg name="gui" value="false"/>
+        <arg name="rviz" value="false"/>
+        <arg name="rate" value="$(arg rate)"/>
+    </include>
+
+    <include file="$(find dvrk_model)/launch/arm_rviz.launch">
+        <arg name="arm" value="ECM"/>
+        <arg name="gui" value="false"/>
+        <arg name="rviz" value="false"/>
+        <arg name="rate" value="$(arg rate)"/>
+    </include>
+
+    <group ns="dvrk">
+        <node pkg="tf" type="static_transform_publisher" name="ECM_urdf_conn" args="-0.021, -1.167, -0.719 0.298, -0.298, 0.641, 0.641 ECM_base ECM_urdf_base 10"/>
+        <node pkg="tf" type="static_transform_publisher" name="PSM1_urdf_conn" args="0.0 0.0 0.0 0.0 0.0 0.0 PSM1_base PSM1_urdf_base 10"/>
+        <node pkg="tf" type="static_transform_publisher" name="PSM2_urdf_conn" args="0.0 0.0 0.0 0.0 0.0 0.0 PSM2_base PSM2_urdf_base 10"/>
+    </group>
+
+    
+    <!-- I suppose mesa_ros_interface are already on -->
+    <group ns="visualizer">
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find util_pkg)/rviz_scenes/ars.rviz"/>
+    </group>
+
+
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+	
+	<node pkg="joy" name="joy_teleop" type="joy_node" output="screen">
+		<param name="input" type="string" value="/dev/input/js0"/>
+	</node>
+
+	<node pkg="peg_ring" name="joy_teleop_py" type="joy_teleop.py" output="screen">
+		<param name="arm_name" type="string" value="ECM"/>        
+    </node>
+	
+</launch>

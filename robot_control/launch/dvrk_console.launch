@@ -1,0 +1,13 @@
+<launch>
+
+  <arg name="config" default='$(find saw_intuitive_research_kit)/../share/console/console-PSM1_PSM2_KIN_SIMULATED.json' />  
+  
+  <node name="dvrk_console"
+        pkg="dvrk_robot"
+        type="dvrk_console_json"        
+        args="-j $(arg config)"                     
+        output="screen"/>
+
+</launch>
+
+

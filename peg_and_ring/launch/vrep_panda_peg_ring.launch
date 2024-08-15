@@ -1,0 +1,43 @@
+<launch>
+
+<!-- <node pkg="tf" type="static_transform_publisher" name="world_2_camera" args="0.98299998045 -0.00304947327822 0.580894529819 -0.384110718966 2.14336087083e-05 0.923287093639 1.36095627568e-06 world camera_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="panda_2_camera" args="0.98299998045 -0.00304947327822 0.580894529819 -0.384110718966 2.14336087083e-05 0.923287093639 1.36095627568e-06 panda_link0 camera_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="camera_2_color_optical" args="0.00283241271973 -5.96046447754e-08 -1.21891498566e-05 0.499999940395 -0.500000059605 0.5 -0.500000059605 camera_link camera_color_optical_frame 100" />
+<node pkg="tf" type="static_transform_publisher" name="camera_2_depth_optical" args="0.00283241271973 -5.96046447754e-08 -1.21891498566e-05 0.499999940395 -0.500000059605 0.5 -0.500000059605 camera_link camera_depth_optical_frame 100" /> -->
+
+
+<!-- <node pkg="tf" type="static_transform_publisher" name="world_2_pandalink0" args="0 0 0 0 0 0 1 world panda_link0 1000" /> -->
+
+	<node name="vrep_combiner" pkg="panda_peg_ring" type="combiner"/>
+	<param name ="/use_sim_time" value="true"/>
+	
+  	<!-- Start panda_peg_ring -->
+	<node name="panda_peg_ring_node_node" pkg="peg_ring" type="peg_ring_node" args="" respawn="false" output="screen">
+			<!--launch-prefix="xterm -e gdb - -args" -->
+			<!--launch-prefix="gnome-terminal -e gdb"> -->
+
+		<param name="cld_topic_name" type="string" value="/camera/depth_registered/points"/>
+		<param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+		<param name="fixed_frame" type="string" value="/camera_link"/>
+		<param name="optical_frame" type="string" value="/camera_color_optical_frame"/>
+		<param name="pose_ee_name" type="string" value="/franka_pub/pose_new"/>
+
+
+		<param name="processing_color" type="int" value="0"/>
+		
+        <param name="orig_cld_voxel_size" value="0.01"/>
+        
+		<param name="object_cluster_distance" type="double" value="0.01"/>
+		<param name="min_object_cluster_size" type="int" value="20"/>
+		<param name="max_object_cluster_size" type="int" value="500"/>
+
+	</node>
+
+	<!--<node pkg="panda_peg_ring" name="GeometryGrasp_py_py" type="geometry_grasp.py" output="screen"/>-->
+	
+	<!--
+	<node name="rviz_panda_peg_ring" pkg="rviz" type="rviz"
+	    args="-d $(find panda_peg_ring)/rviz/panda_peg_ring_rviz.rviz"
+	    respawn="false"/> -->
+	
+</launch>

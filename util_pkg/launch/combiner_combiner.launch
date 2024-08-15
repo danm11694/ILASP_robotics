@@ -1,0 +1,14 @@
+<launch>
+
+	<node name="vrep_combiner" pkg="util_pkg" type="combiner" args="" respawn="false" output="screen">>
+		
+		<!-- if false, it work on coppeliasim with rosInterface plugin-->
+		<param name="old_plugin" type="bool" value="false"/> 
+		
+		<!-- subscribers topic-->
+		<param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+		<param name="camera_depth_name" type="string" value="/camera/aligned_depth_to_color/image_raw"/>
+		<param name="pcd_topic" type="string" value="/camera/depth/image"/>
+	</node>
+
+</launch>

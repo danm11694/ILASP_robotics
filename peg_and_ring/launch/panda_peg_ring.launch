@@ -1,0 +1,56 @@
+<launch>
+	
+	<!-- <node pkg="tf" type="static_transform_publisher" name="world_broadcast_wp" args="0 0 0 0 -0.70710678 0 0.70710678 camera_link rot_camera_link 1000" /> -->
+
+	<!-- <node pkg="tf" type="static_transform_publisher" name="world_broadcast_wp1" args="0 0 0 0.70710678 0 0 0.70710678 rot_camera_link final_link 1000" /> -->
+    <!-- NEW CALIB 8 LUGLIO -->
+	<!-- <node pkg="tf" type="static_transform_publisher" name="world_broadcast_wp" args="0.894956415008 -0.00704724608067 0.602746159764 0.457032513962 0.0102292419996 -0.889017659236 0.0257729578486  panda_link0 camera_link 1000" />   -->
+
+	<!-- IF YOU WANT TO USE GPD ALGORITHM, YOU NEED WORLDPOSECONVERTER
+	IF YOU WANT TO USE GEOMETRY ALGORITHM YOU WILL CALL GEOMETRY GRASP (LIKE) CODE, IT PUBLISH ON /franka_pub/grasping_point 
+	REMEMBER TO CHECK ALSO ON PANDA SIDE THE TOPIC NAME-->
+	<!-- <node pkg="panda_peg_ring" name="worldPoseConverter_py" type="worldPoseConverter.py" output="screen">
+		<param name="grasping_topic" type="string" value="/franka_pub/grasping_point"/>
+        <param name="converted_topic" type="string" value="/peg_converted/pose"/>
+    </node> -->
+
+  	<!-- Start panda_peg_ring -->
+	<node name="panda_peg_ring_node_node" pkg="peg_ring" type="peg_ring_node" args="" respawn="false" output="screen">
+			<!--launch-prefix="xterm -e gdb - -args" -->
+			<!--launch-prefix="gnome-terminal -e gdb"> -->
+
+		<param name="cld_topic_name" type="string" value="/camera/depth_registered/points"/>
+		<param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+		<param name="camera_info_name" type="string" value="/camera/color/camera_info"/>
+		<param name="fixed_frame" type="string" value="/camera_link"/>
+		<param name="optical_frame" type="string" value="/camera_color_optical_frame"/>
+		<param name="pose_ee_name" type="string" value="/franka_pub/pose_new"/>
+		<param name="Current_action" type="string" value="/Current_action"/>		
+		
+		<!-- <param name="processing_color" type="int" value="0"/> -->
+		<!-- PANDA SETUP -->
+        <!-- <param name="orig_cld_voxel_size" value="0.0075"/>  -->        
+		<!-- <param name="object_cluster_distance" type="double" value="0.01"/>
+		<param name="min_object_cluster_size" type="int" value="15"/>
+		<param name="max_object_cluster_size" type="int" value="500"/> -->
+
+		<!-- DAVINCI SETUP -->
+        <param name="orig_cld_voxel_size" value="0.00001"/> <!-- 01-->
+		<param name="object_cluster_distance" type="double" value="0.00001"/>
+		<param name="min_object_cluster_size" type="int" value="1"/>
+		<param name="max_object_cluster_size" type="int" value="500"/>
+		<param name="ee_treshold" type="double" value="0.06"/>
+		<param name="tracking_value" type="string" value="/tracking_value"/>	
+		<param name="threshold_tracking" type="int" value="100"/>
+		
+
+	</node>
+
+
+	<!-- <node pkg="panda_peg_ring" name="GeometryGrasp_py_py" type="geometry_grasp.py" output="screen"/>  -->
+
+	<node name="rviz_panda_peg_ring" pkg="rviz" type="rviz"
+	    args="-d $(find peg_ring)/rviz/panda_peg_ring_rviz.rviz"
+	    respawn="false"/>  
+	
+</launch>

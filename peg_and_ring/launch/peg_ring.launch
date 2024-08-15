@@ -1,0 +1,58 @@
+<launch>
+
+	<!-- <param name ="/use_sim_time" value="false"/> -->
+	<node name="vrep_combiner" pkg="peg_and_ring" type="combiner"/>
+	<!-- <node pkg="tf" type="static_transform_publisher" name="world_broadcast" args="0.008 -0.554 1.712 -0.653 0.653 -0.272 -0.272 world camera_depth_optical_frame 1000" />  -->
+
+  	<!-- Start peg_ring -->
+	<node name="peg_ring_node" pkg="peg_and_ring" type="peg_ring_node" args="" respawn="false" output="screen">
+			<!--launch-prefix="xterm -e gdb - -args" -->
+			<!--launch-prefix="gnome-terminal -e gdb"> -->
+
+        <rosparam>tool_subscribers: [/PSM1/measured_cp,/PSM2/measured_cp]</rosparam>
+
+		<param name="cld_topic_name" type="string" value="/camera/depth_registered/points"/>
+		<param name="camera_color_name" type="string" value="/camera/color/image_rect_color"/>
+		<param name="camera_info_name" type="string" value="/camera/color/camera_info"/>
+		<!-- <param name="fixed_frame" type="string" value="/camera_link"/> -->
+		<param name="fixed_frame" type="string" value="/world"/>
+		<param name="optical_frame" type="string" value="/camera_depth_optical_frame"/>
+		<param name="Current_action" type="string" value="/Current_action"/>		
+
+		<!-- <param name="torus_algorithm" type="string" value="RANSAC"/> -->
+		<param name="torus_points" type="int" value="1000"/>
+		
+		<!--
+	"RANSAC"
+    "LMEDS"
+    "MSAC"
+    "RRANSAC"
+    "RMSAC"
+    "MLESAC"
+    "PROSAC"-->    
+    
+		<!-- <param name="num_ee" type="int" value="2"/> -->
+		<!-- <param name="pose_ee1_name" type="string" value="/dvrk/PSM1/cartesian_position"/> -->
+		<!-- <param name="pose_ee2_name" type="string" value="/dvrk/PSM2/cartesian_position"/> -->
+		<param name="robot_frame" type="string" value="/PSM1_base"/>
+		
+		<!-- DAVINCI SETUP -->
+        <param name="orig_cld_voxel_size" value="0.001"/> <!-- 01-->
+		<param name="object_cluster_distance" type="double" value="0.005"/>
+		<param name="min_object_cluster_size" type="int" value="1"/>
+		<!-- <param name="max_object_cluster_size" type="int" value="500"/> -->
+		<param name="ee_treshold" type="double" value="0.06"/>
+		<param name="tracking_value" type="string" value="/tracking_value"/>	
+		<param name="threshold_tracking" type="double" value="0.005"/>		
+		<param name="torus_points" type="int" value="40"/>		
+
+	</node>
+
+
+	<!-- <node pkg="panda_peg_ring" name="GeometryGrasp_py_py" type="geometry_grasp.py" output="screen"/>  -->
+
+	<!-- <node name="rviz_peg_ring" pkg="rviz" type="rviz"
+	    args="-d $(find peg_and_ring)/rviz/peg_ring_rviz.rviz"
+	    respawn="false"/>   -->
+	
+</launch>
