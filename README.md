@@ -1,3 +1,12 @@
+# INTRO
+The increasing level of autonomy of robots poses challenges of trust and social acceptance, especially in human-robot interaction scenarios.
+This requires an interpretable implementation of robotic cognitive capabilities, possibly based on formal methods as logics for the definition of task specifications. However, prior knowledge is often unavailable in complex realistic scenarios.
+In this paper, we propose an **offline algorithm** based on **inductive logic programming from noisy examples** to extract task specifications (i.e., action preconditions, constraints and effects) directly from **raw data** of few heterogeneous (i.e., not repetitive) robotic executions. Our algorithm leverages on the output of **any unsupervised action identification algorithm from video-kinematic recordings**. Combining it with the definition of very basic, almost task-agnostic, commonsense concepts about the environment, which contribute to the interpretability of our methodology, we are able to learn logical axioms encoding preconditions of actions, as well as their effects in the event calculus paradigm. 
+
+Since the quality of learned specifications depends mainly on the accuracy of the action identification algorithm, we also propose an **online framework for incremental refinement of task knowledge from user's feedback**, guaranteeing safe execution.
+
+Results in a standard manipulation task and benchmark for user training in the safety-critical surgical robotic scenario (**the peg transfer**), show the robustness, data- and time-efficiency of our methodology, with promising results towards the scalability in more complex domains.
+
 # CITATION
 @article{meli2024inductive,
   title={Inductive Learning of Robot Task Knowledge from Raw Data and Online Expert Feedback},
