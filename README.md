@@ -1,7 +1,7 @@
 # CITATION
 @article{meli2024inductive,
   title={Inductive Learning of Robot Task Knowledge from Raw Data and Online Expert Feedback},
-  author={Meli, Daniele},
+  author={Meli, Daniele and Fiorini, Paolo},
   journal={Machine Learning},
   year={2024, in publication},
   publisher={Springer}
